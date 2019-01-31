@@ -8,21 +8,22 @@
 
 At the root of this repository:
 ```
-docker build -t so0k/es-rally .
-docker push so0k/es-rally
+docker build -t dhubchris/es-rally .
+docker push dhubchris/es-rally
 ```
 
 1. Run esrally container in kubernetes:
 
 ```
-kubectl run -it --generator "run-pod/v1" esrally --image so0k/es-rally -- /bin/sh
+kubectl run -it --generator "run-pod/v1" e-srally --image dhubchris/es-rally -- /bin/sh
 ```
 
 1. start benchmark agains es-cluster (from the attached terminal)
 
 ```
 esrally list tracks
-esrally --pipeline=benchmark-only --target-hosts=es-elasticsearch:9200
+esrally --pipeline=benchmark-only --target-hosts=elasticsearch.kube-system.svc:9200
+esrally --pipeline=benchmark-only --target-hosts=elasticsearch.kube-system.svc:9200 --tracks=eventdata
 ```
 
 NOTE: Read warnings about why you shouldn't run esrally against your production escluster.
